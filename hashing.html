@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Hashing Web App</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400&display=swap">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <link rel="stylesheet" href="Styling.css">
+    
+</head>
+<div  class="background-color"> 
+
+
+<body>
+    <div class="app-container">
+    <div class="typing-text">
+    <p  id="typing-output" class="typing-animation"></p>
+        </div>
+            <div class="container">
+                <h1>Multi-Hashing Web App</h1>
+                    <div class="input-container">
+                        <label for="text-input">Enter text to hash:</label>
+                            <textarea id="text-input" placeholder="Enter text here"></textarea>
+                                </div>
+                                      <div class="input-container">
+                                      <label for="hash-algorithm">Choose a hashing algorithm:</label>
+                                      <select id="hash-algorithm">
+                                         <option value="MD5">MD5</option>
+                                         <option value="SHA-256">SHA-256</option>
+                                         <option value="SHA-512">SHA-512</option>
+                                      </select>
+                                      <div class="input-container">
+                                      <label for="hash-encoding">Choose an encoding method:</label>
+                                <select id="hash-encoding">
+                            <option value="none">None</option>
+                        <option value="base64">Base64</option>
+                    <option value="url-encode">URL-Encode</option>
+                </select>
+            </div>
+            
+           </div>
+                <button id="hash-btn" class="action-button">Hash</button>
+                    <div class="result-container">
+                          <p class="result-label">Hashed Text:</p>
+                              <div id="results" class="result-text"></div>
+                                  </div>
+    </div>
+        <div class="typing-text" id="result-text">Your generated hash goes here</div>
+            <button onclick="copyToClipboard()">Copy Hash</button>
+
+                <script>
+                     function copyToClipboard() {
+                         const hashTextElement = document.getElementById("results");
+                            const hashText = hashTextElement.innerText;
+
+                              if (hashText !== "Your generated hash goes here") {
+                                  navigator.clipboard.writeText(hashText)
+                                    .then(() => alert("Hash copied to clipboard: " + hashText))
+                                    .catch(err => {
+                                  console.error("Unable to copy to clipboard", err);
+                                  fallbackCopyTextToClipboard(hashText);
+                                });
+                              } else {
+                                      alert("No hash to copy.");
+                                     }
+                                }
+
+    function fallbackCopyTextToClipboard(text) {
+     const tempInput = document.createElement("textarea");
+        tempInput.value = text;
+             document.body.appendChild(tempInput);
+             tempInput.select();
+             document.execCommand("copy");
+             document.body.removeChild(tempInput);
+               alert("Hash copied to clipboard: " + text);
+        }
+    </script>
+
+    
+<script src="Javascript.js"></script>
+<!-- <div class="footer">
+    <div class="copyright">
+     &copy;Team Red. All rights reserved.
+    </div>
+</div> -->
+
+    </div>   
+</body>
+</html>
